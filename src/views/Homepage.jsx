@@ -53,7 +53,7 @@ export default function Homepage() {
                         {capital?.join(', ') || 'has no capital'}</p>
                 </section>
                 <figure className={'flag-wrapper'}>
-                    <img src={flags?.svg} alt={flags?.alt || `The flag of ${name.common}`} loading={'lazy'}/>
+                    <img className={'flag'} src={flags?.svg} alt={flags?.alt || `The flag of ${name.common}`} loading={'lazy'}/>
                 </figure>
             </Link>)
     });

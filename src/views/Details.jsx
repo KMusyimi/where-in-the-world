@@ -21,7 +21,8 @@ export default function Details() {
 
     const langs = !isEmpty(languages) ? Object.values(languages).join(', ') : 'no languages';
 
-    const links = borders.length > 0 && borders.map((country, idx) => <Link key={`link-${idx}`}
+    const links = borders.length > 0 && borders.map((country, idx) => <Link className={'country-link'}
+                                                                            key={`link-${idx}`}
                                                                             to={`/page/${country
                                                                                 .replace(/\s+/g, '+')
                                                                                 .toLowerCase()}`}>{country}</Link>);
@@ -30,10 +31,10 @@ export default function Details() {
     return (
         <div className={'details-container'}>
             {<BackButton/>}
-            <section className='page d-flex'>
+            <section className='page'>
                 <section>
                     <h1 className={'fw-800'}>{name.common}</h1>
-                    <div className={'details-container'}>
+                    <div className={'details-wrapper'}>
                         <div>
                             <p><span className='fw-600 txt-caps'>native name:</span>{nativeName}</p>
                             <p><span
@@ -45,17 +46,18 @@ export default function Details() {
                         </div>
                         <div>
                             <p className={'tld'}><span className='fw-600 txt-caps'>top level domain:</span>{tld}</p>
-                            <p><span className='fw-600 txt-caps'>currencies:</span>{currency}</p>
-                            <p><span className='fw-600 txt-caps'>languages:</span>{langs}</p>
+                            <p><span className='currencies fw-600 txt-caps'>currencies:</span>{currency}</p>
+                            <p><span className='languages fw-600 txt-caps'>languages:</span>{langs}</p>
                         </div>
                     </div>
-                    {borders.length > 0 ? <div className='borders'>
-                        <p className={'fw-600 text-caps'}>border countries:</p>
+                    {borders.length > 0 ? <section className='borders'>
+                        <h2 className={'fw-600 txt-caps'}>border countries:</h2>
                         <div>{links}</div>
-                    </div> : <p className={'fw-600'}>{`${name.common} has no border countries`}</p>}
+                    </section> : <h2 className={'borders-none fw-600'}><span
+                        className={'country-name fw-800'} style={{color: '#0D9276'}}>{`${name.common}`}</span> has no border countries</h2>}
                 </section>
                 <figure className={'flag-wrapper'}>
-                    <img src={`${flags.svg}`}
+                    <img className={'flag'} src={`${flags.svg}`}
                          alt={flags?.alt || `The flag for ${name.common}`}/>
                 </figure>
             </section>

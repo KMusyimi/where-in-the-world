@@ -6,8 +6,8 @@
     --primary-blue: hsl(209, 23%, 22%);
     --secondary-blue: hsl(207, 26%, 17%);
     --dark-blue: hsl(200, 15%, 8%);
-    --dark-gray: hsl(0, 0%, 52%);
-    --light-gray: hsl(0, 0%, 98%);
+    --dark-gray: rgb(228, 224, 225);
+    --light-gray: rgb(238, 238, 238);
     --white: hsl(0, 0%, 100%);
 
 
@@ -26,11 +26,20 @@
 [data-theme="dark"] {
     color: var(--light-gray);
     background-color: var(--secondary-blue);
+    --elements-color: var(--primary-blue);
+    --elements-box-shadow: transparent;
+    --input-color: var(--light-gray);
+    --input-border-color: transparent;
 }
 
 [data-theme="light"] {
     color: var(--dark-blue);
     background-color: var(--light-gray);
+    --elements-color: var(--white);
+    --elements-box-shadow: var(--dark-gray);
+    --input-color: hsl(0, 0%, 52%);
+    --input-border-color: var(--light-gray);
+
 }
 
 html {
@@ -42,9 +51,11 @@ html {
     padding: unset;
     margin: unset;
 }
+
 img {
     max-width: 100%;
 }
+
 a {
     color: inherit;
     text-decoration: inherit;
@@ -52,7 +63,7 @@ a {
 }
 
 a:hover {
-    color: #257180;
+    color: #0D9276;
 }
 
 
@@ -62,35 +73,35 @@ body {
     min-width: 100%;
     min-height: 100vh;
 }
-input, input::placeholder {
+
+input, button, input::placeholder {
     font-family: inherit;
 }
+
 button {
     font-size: 1rem;
     font-weight: 500;
-    font-family: inherit;
     background-color: inherit;
     color: inherit;
     cursor: pointer;
     border: none;
 }
+
 button:not(.filter-tag) {
-    border: 1px solid transparent;
+    border: transparent;
     transition: border-color 0.25s ease-in-out;
 }
 
-button:hover {
-    border-color: #B7C4CF;
-    box-shadow: 0 0 2px #B7C4CF;
-}
-
-button:focus,
-button:focus-visible {
+button.back-btn:focus,
+button.back-btn:focus-visible {
     outline: 2px auto -webkit-focus-ring-color;
 }
-#root{
+
+#root {
     min-width: 100%;
 }
+
+
 @media (prefers-color-scheme: light) {
     :root {
         color: var(--dark-blue);

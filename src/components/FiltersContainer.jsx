@@ -3,14 +3,14 @@ import {useContext, useState} from "react";
 import {HomepageContext} from "../views/Homepage.jsx";
 import {useSearchParams} from "react-router-dom";
 
+// let toggleTimer = null;
+
 export default function FiltersContainer() {
     const [, setSearchParams] = useSearchParams();
     const regionFilter = useContext(HomepageContext);
     const [toggled, setToggled] = useState(null);
 
-    function toggleFilter() {
-        setToggled(!toggled);
-    }
+    const toggle = () => setToggled(!toggled);
 
     function handleFilterChange(key, value) {
         setSearchParams(prevParams => {
@@ -26,7 +26,7 @@ export default function FiltersContainer() {
     return (
         <div className={'filter-container'}>
             <button className={`${toggled ? 'dropdown-btn dropdown-btn-toggled' : 'dropdown-btn '}`}
-                    type={'button'} onClick={toggleFilter}>Filter by
+                    type={'button'} onClick={toggle}>Filter by
                 Region {toggled ? <IoIosCloseCircleOutline/> : <IoIosArrowDropdown/>}</button>
             <div className={'tags-container'}>
                 <button className={`filter-tag txt-caps ${!regionFilter ? 'checked' : ''}`}

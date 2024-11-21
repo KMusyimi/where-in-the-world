@@ -6,6 +6,7 @@ export default function SearchForm() {
     function handleFilterCountries(e) {
         e.preventDefault();
         const {value} = e.target;
+        
         const countryCards = document.querySelectorAll(".country-card");
 
         for (let i = 0; i < countryCards.length; i++) {
@@ -15,7 +16,6 @@ export default function SearchForm() {
 
             } else {
                 countryCards[i].style.display = "none";
-
             }
         }
     }
@@ -23,7 +23,7 @@ export default function SearchForm() {
     return (
         <Form method={'get'} action={'results'}>
             <div className={'input-container d-flex'}>
-                <button type={'submit'}><IoSearch/></button>
+                <IoSearch/>
                 <input
                     id={'search'}
                     type='search'

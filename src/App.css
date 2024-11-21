@@ -208,6 +208,10 @@
     font-size: .925rem;
     margin-bottom: .4em;
 }
+.dropdown-btn + .tags-container button:hover {
+    color: #0D9276;
+    font-weight: 500;
+}
 
 .dropdown-btn + .tags-container > button:last-child {
     margin-bottom: 0;
@@ -284,6 +288,7 @@
 }
 
 .details-container {
+
     padding-inline: 1em;
 }
 
@@ -313,7 +318,7 @@
     margin-bottom: .6em;
 }
 
-.details-container .page section > .details-wrapper p > span{
+.details-container .page section > .details-wrapper p > span {
     text-wrap: nowrap;
     align-self: start;
 }
@@ -361,8 +366,29 @@
     height: fit-content;
     width: fit-content;
 }
+.err-container{
+    height: 100%;
+    align-items: center;
+}
+.err-container > div{
+    align-items: center;
+    margin: auto;
+}
+.err-container > div figure {
+    margin: auto;
+}
 
+.err-container > div figure svg{
+    font-size: 13rem;
+    margin-bottom: .4em;
+}
 
+.err-container .back-btn{
+    align-self: start;
+}
+.param {
+    color: #FF4545;
+}
 @media only screen and (min-width: 625px) {
     .header {
         padding: 1.15em 4em;
@@ -401,7 +427,8 @@
         align-self: start;
         margin-bottom: 0;
     }
-    .details-container .page section > h1{
+
+    .details-container .page section > h1 {
         margin-bottom: .85em;
     }
 }

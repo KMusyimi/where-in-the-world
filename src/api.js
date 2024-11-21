@@ -16,12 +16,15 @@ export async function getPageData(param) {
     const fields = ['name', 'population', 'region', 'capital', 'flags',
         'subregion', 'tld', 'languages', 'currencies', 'borders'];
 
-    const url = `https://restcountries.com/v3.1/name/${param.replace(/\+/g, " ")}?fullText=true&&fields=${fields.join(',')}`;
+    const url = `https://restcountries.com/v3.1/name/${param.replace(/\+/g, " ").trim()}?fullText=true&&fields=${fields.join(',')}`;
 
     const resp = await fetch(url);
     if (!resp.ok) {
         throw {
-            status: resp.status, statusText: resp.statusText, message: `Could not get ${param}`
+            status: resp.status,
+            statusText: resp.statusText,
+            message: `Could not get country by the name `,
+            param: param
         }
     }
     const countryData = await resp.json();

@@ -10,6 +10,7 @@ export async function detailsLoader({params, request}) {
 
 export default function Details() {
     const country = useLoaderData();
+    window.scrollTo({top: 0, behavior:"smooth"});
 
     const {
         name, population, region, capital, flags, subregion, tld, languages, currencies, borders
@@ -54,7 +55,8 @@ export default function Details() {
                         <h2 className={'fw-600 txt-caps'}>border countries:</h2>
                         <div>{links}</div>
                     </section> : <h2 className={'borders-none fw-600'}><span
-                        className={'country-name fw-800'} style={{color: '#0D9276'}}>{`${name.common}`}</span> has no border countries</h2>}
+                        className={'country-name fw-800'} style={{color: '#0D9276'}}>{`${name.common}`}</span> has no
+                        border countries</h2>}
                 </section>
                 <figure className={'flag-wrapper'}>
                     <img className={'flag'} src={`${flags.svg}`}

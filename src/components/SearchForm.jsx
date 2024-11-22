@@ -9,8 +9,8 @@ export default function SearchForm() {
         const countryCards = document.querySelectorAll(".country-card");
 
         for (let i = 0; i < countryCards.length; i++) {
-            const countryId = countryCards[i].id;
-            if (countryId.indexOf(value.replace(/\s+/g, '+').toLowerCase()) > -1) {
+            const countryId = countryCards[i].id.replace(/\+/g, " ");
+            if (countryId.indexOf(value.trim().toLowerCase()) > -1) {
                 countryCards[i].style.display = "";
 
             } else {

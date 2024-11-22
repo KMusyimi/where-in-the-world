@@ -16,7 +16,7 @@ export async function getPageData(param) {
     const fields = ['name', 'population', 'region', 'capital', 'flags',
         'subregion', 'tld', 'languages', 'currencies', 'borders'];
 
-    const url = `https://restcountries.com/v3.1/name/${param.replace(/\+/g, " ").trim()}?fullText=true&&fields=${fields.join(',')}`;
+    const url = `https://restcountries.com/v3.1/name/${param.trim().replace(/\+/g, " ")}?fullText=true&&fields=${fields.join(',')}`;
 
     const resp = await fetch(url);
     if (!resp.ok) {

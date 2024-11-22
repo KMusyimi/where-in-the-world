@@ -1,7 +1,8 @@
 import {getPageData} from "../api.js";
-import {Link, useLoaderData} from "react-router-dom";
+import {Link, useLoaderData, useNavigation} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import BackButton from "../components/BackButton.jsx";
+import {Spinner} from "../components/Spinner.jsx";
 
 export async function detailsLoader({params, request}) {
     const req = new URL(request.url).searchParams.get('search_query');
@@ -10,7 +11,16 @@ export async function detailsLoader({params, request}) {
 
 export default function Details() {
     const country = useLoaderData();
-    window.scrollTo({top: 0, behavior:"smooth"});
+    const navigation = useNavigation();
+
+    if (navigation.state === 'loading') {
+        return (<Spinner/>)
+    }
+
+    if (navigation.state === 'idle') {
+
+    }
+
 
     const {
         name, population, region, capital, flags, subregion, tld, languages, currencies, borders
@@ -60,7 +70,8 @@ export default function Details() {
                 </section>
                 <figure className={'flag-wrapper'}>
                     <img className={'flag'} src={`${flags.svg}`}
-                         alt={flags?.alt || `The flag for ${name.common}`}/>
+                         alt={flags?.alt || `The flag for ${name.common}`}
+                         onLoad={() => window.scrollTo({top: 0, behavior: "smooth"})}/>
                 </figure>
             </section>
         </div>)

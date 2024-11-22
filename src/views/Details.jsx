@@ -17,11 +17,6 @@ export default function Details() {
         return (<Spinner/>)
     }
 
-    if (navigation.state === 'idle') {
-
-    }
-
-
     const {
         name, population, region, capital, flags, subregion, tld, languages, currencies, borders
     } = country;

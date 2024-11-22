@@ -1,3 +1,7 @@
+
+const sleep = (ms)=> new Promise(resolve => setTimeout(resolve, ms));
+
+
 export async function getCountries() {
     const url = 'https://restcountries.com/v3.1/all?fields=name,population,region,capital,flags'
     const resp = await fetch(url);
@@ -13,6 +17,7 @@ export async function getPageData(param) {
     if (!param) {
         return [];
     }
+    await sleep(500);
     const fields = ['name', 'population', 'region', 'capital', 'flags',
         'subregion', 'tld', 'languages', 'currencies', 'borders'];
 

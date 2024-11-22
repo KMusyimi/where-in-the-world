@@ -4,6 +4,7 @@ import {formatPopulation} from "../utils.js";
 import BackButton from "../components/BackButton.jsx";
 import {Spinner} from "../components/Spinner.jsx";
 
+
 export async function detailsLoader({params, request}) {
     const req = new URL(request.url).searchParams.get('search_query');
     return await getPageData(req ? req : params.id);
@@ -12,6 +13,7 @@ export async function detailsLoader({params, request}) {
 export default function Details() {
     const country = useLoaderData();
     const navigation = useNavigation();
+    window.scrollTo({top: 0, behavior: "auto"});
 
     if (navigation.state === 'loading') {
         return (<Spinner/>)
@@ -66,7 +68,7 @@ export default function Details() {
                 <figure className={'flag-wrapper'}>
                     <img className={'flag'} src={`${flags.svg}`}
                          alt={flags?.alt || `The flag for ${name.common}`}
-                         onLoad={() => window.scrollTo({top: 0, behavior: "smooth"})}/>
+                    />
                 </figure>
             </section>
         </div>)

@@ -30,6 +30,8 @@
     --elements-box-shadow: transparent;
     --input-color: var(--light-gray);
     --input-border-color: transparent;
+    --spinner-color: rgb(37, 113, 128);
+
 }
 
 [data-theme="light"] {
@@ -39,7 +41,7 @@
     --elements-box-shadow: var(--dark-gray);
     --input-color: hsl(0, 0%, 52%);
     --input-border-color: var(--light-gray);
-
+    --spinner-color: rgb(253, 139, 81);
 }
 
 html {

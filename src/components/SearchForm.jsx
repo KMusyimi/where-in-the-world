@@ -23,13 +23,17 @@ export default function SearchForm(props) {
         e.preventDefault();
         const {value} = e.target;
         e.target.focus();
+
         setDisplayContainer(true);
+
         if (!value) {
             setResults([]);
             setDisplayContainer(false);
             return;
         }
-        const countryRegx = new RegExp(`^${value}`, 'g');
+
+        const countryRegx = new RegExp('^' + value);
+        alert(countryRegx);
         setResults(searchData.filter(data => countryRegx.test(data.name)));
     }
 

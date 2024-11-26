@@ -75,7 +75,7 @@ export default function SearchForm(props) {
                         }} className={'close-button'}>
                     <IoIosCloseCircleOutline/>
                 </button>
-                {results[0].name}
+                {results.length > 0 && results.map(country => country.name)}
             </div>
             <ul className={'results-list'}
                 id={'list'}>{results.length > 0 ? displayResults : 'No countries found'}

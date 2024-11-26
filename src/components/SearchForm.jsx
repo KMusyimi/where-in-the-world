@@ -22,17 +22,15 @@ export default function SearchForm(props) {
     function handleFilterCountries(e) {
         e.preventDefault();
         const {value} = e.target;
-        e.target.focus()
-        const countryRegx = new RegExp(`^${value}`);
+        e.target.focus();
         setDisplayContainer(true);
         if (!value) {
             setResults([]);
             setDisplayContainer(false);
             return;
         }
+        const countryRegx = new RegExp(`^${value}`, 'g');
         setResults(searchData.filter(data => countryRegx.test(data.name)));
-        alert(results)
-
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (

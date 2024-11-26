@@ -3,9 +3,9 @@ import {IoIosCloseCircleOutline} from "react-icons/io";
 
 import {IoSearch} from "react-icons/io5";
 import {useState} from "react";
+import {searchData} from "../api";
 
- 
-export default function SearchForm(props) {
+export default function SearchForm() {
     const [results, setResults] = useState([]);
     const [displayContainer, setDisplayContainer] = useState(false);
 
@@ -20,8 +20,7 @@ export default function SearchForm(props) {
             setDisplayContainer(false);
             return;
         }
-        // eslint-disable-next-line react/prop-types
-        setResults(props.searchData.filter(data => countryRegx.test(data.name) && data));
+        setResults(searchData.filter(data => countryRegx.test(data.name) && data));
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (

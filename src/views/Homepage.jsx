@@ -1,4 +1,4 @@
-import {getCountries, searchData} from "../api";
+import {getCountries} from "../api";
 import {Link, useLoaderData, useSearchParams} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import SearchForm from "../components/SearchForm.jsx";
@@ -63,7 +63,7 @@ export default function Homepage() {
     return (
         <>
             <div className='main-nav'>
-                <div className={'search-container'}>{<SearchForm searchData={searchData}/>}</div>
+                <div className={'search-container'}>{<SearchForm/>}</div>
                 {<HomepageContext.Provider value={regionFilter}> <FiltersContainer/> </HomepageContext.Provider>}
             </div>
             <div className={'countries-container'}>{countries}</div>

@@ -1,9 +1,9 @@
-import {searchData, getCountries} from "../api";
+import {getCountries, searchData} from "../api";
 import {Link, useLoaderData, useSearchParams} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import SearchForm from "../components/SearchForm.jsx";
 import FiltersContainer from "../components/FiltersContainer.jsx";
-import {createContext, useEffect, useState} from "react";
+import {createContext, useEffect} from "react";
 import {HiMiniArrowUpCircle} from "react-icons/hi2";
 
 export const HomepageContext = createContext('');

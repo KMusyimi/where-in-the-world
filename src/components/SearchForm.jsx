@@ -30,7 +30,7 @@ export default function SearchForm(props) {
             setDisplayContainer(false);
             return;
         }
-        setResults(searchData.filter(data => countryRegx.test(data.name) && data));
+        setResults(searchData.filter(data => countryRegx.test(data.name)));
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (
@@ -75,7 +75,7 @@ export default function SearchForm(props) {
                         }} className={'close-button'}>
                     <IoIosCloseCircleOutline/>
                 </button>
-                {results.length > 0 && results.map(country => country.name)}
+                <p>{results.length > 0 && results.map(country=> country.name)}</p>
             </div>
             <ul className={'results-list'}
                 id={'list'}>{results.length > 0 ? displayResults : 'No countries found'}

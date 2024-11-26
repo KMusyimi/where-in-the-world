@@ -33,8 +33,8 @@ export default function SearchForm(props) {
         }
 
         const countryRegx = new RegExp('^' + value);
-        alert(searchData.filter(data => countryRegx.test(data.name)));
-        setResults(searchData.filter(data => countryRegx.test(data.name)));
+        console.log(searchData.filter(data => data.name.match(countryRegx)));
+        setResults(searchData.filter(data =>  data.name.match(countryRegx)));
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (

@@ -4,15 +4,13 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import Homepage, {homepageLoader} from "./views/Homepage.jsx";
 import Details, {detailsLoader} from "./views/Details.jsx";
 import Layout from "./components/Layout.jsx";
-import Error from "./components/Error.jsx";
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
-        <Route index element={<Homepage/>} loader={homepageLoader}/>
-        <Route path='page/:id' element={<Details/>} loader={detailsLoader}/>
-        <Route path={'results'} element={<Details/>} loader={detailsLoader} errorElement={<Error/>}/>
-    </Route>
-), {
+    <Route index element={<Homepage/>} loader={homepageLoader}/>
+    <Route path={'page'} element={<Details/>} loader={detailsLoader}/>
+    {/*<Route path={'results'} element={<Details/>} errorElement={<Error/>}/>*/}
+</Route>), {
     future: {
         v7_relativeSplatPath: true,
         v7_normalizeFormMethod: true,

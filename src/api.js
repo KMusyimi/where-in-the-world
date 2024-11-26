@@ -1,6 +1,6 @@
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-const sleep = (ms)=> new Promise(resolve => setTimeout(resolve, ms));
-
+export let searchData = [];
 
 export async function getCountries() {
     const url = 'https://restcountries.com/v3.1/all?fields=name,population,region,capital,flags'
@@ -10,7 +10,22 @@ export async function getCountries() {
             status: resp.status, statusText: resp.statusText, message: 'Could not get Countries'
         }
     }
-    return await resp.json();
+    const countries = await resp.json();
+
+    if (searchData.length === 0) {
+        searchData = countries.map(country => {
+            return {
+                name: country.name.common.toLowerCase().trim(),
+                flags: country.flags.png,
+                capital: country.capital.join(', '),
+                population: country.population,
+                alt: country.flags.alt
+            }
+        })
+        searchData = searchData.sort((a, b) => b.population - a.population);
+    }
+
+    return countries;
 }
 
 export async function getPageData(param) {

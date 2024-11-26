@@ -5,9 +5,9 @@ import BackButton from "../components/BackButton.jsx";
 import {Spinner} from "../components/Spinner.jsx";
 
 
-export async function detailsLoader({params, request}) {
-    const req = new URL(request.url).searchParams.get('search_query');
-    return await getPageData(req ? req : params.id);
+export async function detailsLoader({request}) {
+    const req = new URL(request.url).searchParams.get('country');
+    return await getPageData(req);
 }
 
 export default function Details() {
@@ -31,7 +31,7 @@ export default function Details() {
 
     const links = borders.length > 0 && borders.map((country, idx) => <Link className={'country-link'}
                                                                             key={`link-${idx}`}
-                                                                            to={`/page/${country
+                                                                            to={`/page/?country=${country
                                                                                 .replace(/\s+/g, '+')
                                                                                 .toLowerCase()}`}>{country}</Link>);
 

@@ -1,9 +1,9 @@
-import {getCountries} from "../api";
+import {searchData, getCountries} from "../api";
 import {Link, useLoaderData, useSearchParams} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import SearchForm from "../components/SearchForm.jsx";
 import FiltersContainer from "../components/FiltersContainer.jsx";
-import {createContext, useEffect} from "react";
+import {createContext, useEffect, useState} from "react";
 import {HiMiniArrowUpCircle} from "react-icons/hi2";
 
 export const HomepageContext = createContext('');
@@ -35,13 +35,14 @@ export default function Homepage() {
         });
 
     }, []);
+
+
     const countries = countriesArr.map((country, idx) => {
         const {capital, flags, population, region, name} = country;
-
         return (
             <Link key={`c-${idx}`}
                   id={`${name.common.replace(/\s+/g, '+').toLowerCase()}`}
-                  to={`page/${name.common.replace(/\s+/g, '+').toLowerCase()}`}
+                  to={`page/?country=${name.common.replace(/\s+/g, '+').toLowerCase()}`}
                   className={'country-card d-flex fx-direction--column'}>
                 <section className={'country-info'}>
                     <h1 className={'fw-800'}>{name.common}</h1>
@@ -53,7 +54,8 @@ export default function Homepage() {
                         {capital?.join(', ') || 'has no capital'}</p>
                 </section>
                 <figure className={'flag-wrapper'}>
-                    <img className={'flag'} src={flags?.svg} alt={flags?.alt || `The flag of ${name.common}`} loading={'lazy'}/>
+                    <img className={'flag'} src={flags?.svg} alt={flags?.alt || `The flag of ${name.common}`}
+                         loading={'lazy'}/>
                 </figure>
             </Link>)
     });
@@ -61,7 +63,7 @@ export default function Homepage() {
     return (
         <>
             <div className='main-nav'>
-                <div className={'form-container'}>{<SearchForm/>}</div>
+                <div className={'search-container'}>{<SearchForm searchData={searchData}/>}</div>
                 {<HomepageContext.Provider value={regionFilter}> <FiltersContainer/> </HomepageContext.Provider>}
             </div>
             <div className={'countries-container'}>{countries}</div>

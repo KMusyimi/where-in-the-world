@@ -63,7 +63,7 @@ export default function Homepage() {
     return (
         <>
             <div className='main-nav'>
-                <div className={'search-container'}>{<SearchForm/>}</div>
+                <div className={'search-container'}>{<SearchForm searchData={data}/>}</div>
                 {<HomepageContext.Provider value={regionFilter}> <FiltersContainer/> </HomepageContext.Provider>}
             </div>
             <div className={'countries-container'}>{countries}</div>

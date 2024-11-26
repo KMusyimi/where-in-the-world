@@ -3,11 +3,21 @@ import {IoIosCloseCircleOutline} from "react-icons/io";
 
 import {IoSearch} from "react-icons/io5";
 import {useState} from "react";
-import {searchData} from "../api";
 
-export default function SearchForm() {
+export default function SearchForm(props) {
     const [results, setResults] = useState([]);
     const [displayContainer, setDisplayContainer] = useState(false);
+
+    // eslint-disable-next-line react/prop-types
+    const searchData = props.searchData.map(country => {
+        return {
+            name: country.name.common.toLowerCase().trim(),
+            flags: country.flags.png,
+            capital: country.capital.join(', '),
+            population: country.population,
+            alt: country.flags.alt
+        }
+    }).sort((a, b) => b.population - a.population);
 
     function handleFilterCountries(e) {
         e.preventDefault();
@@ -35,7 +45,8 @@ export default function SearchForm() {
                     <p>{result.capital}</p>
                 </figcaption>
             </figure>
-        </Link>));
+        </Link>)
+    );
 
     return (<>
         <div className={'form-container'}>

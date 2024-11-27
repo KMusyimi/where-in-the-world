@@ -175,33 +175,34 @@
 }
 
 .results-container {
-    position: absolute;
-    top: 3.35em;
-    background-color: var(--elements-color);
     width: 100%;
-    z-index: 1000;
-    padding: 1.5em;
     border-radius: .335em;
 }
 .results-container >div {
-    position: relative;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
+    padding: .65em .5em;
 }
+.results-container >div p{
+    font-size: .85rem;
+}
+
 .results-container button {
-    position: absolute;
+    align-items: center;
     color: #FF4545;
-    right: .4em;
-    top: -.2em;
-    font-size: 2.35rem;
+    font-size: 2rem;
 }
 .results-container > ul {
+    background-color: var(--elements-color);
+    padding: 1.5em;
     border-radius: inherit;
     max-height: 330px;
     overflow-y: auto;
 }
 .result-links {
     display: block;
-    margin-bottom: 1em;
+    margin-bottom: 1.25em;
 }
 .result-links:last-child{
     margin-bottom: 0;
@@ -213,8 +214,8 @@
 }
 
 .result-links img {
-    width: 55px;
-    height: 55px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     box-shadow: 0 0 6px var(--elements-box-shadow);
 }
@@ -222,14 +223,14 @@
     overflow: hidden;
 }
 .result-links h1 {
-    font-size: 1.02rem;
+    font-size: .956rem;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .result-links p {
-    font-size: .915rem;
+    font-size: .9rem;
 }
 
 .filter-container {
@@ -363,7 +364,7 @@
 }
 
 .btn-top > svg {
-    font-size: 4rem;
+    font-size: 3.85rem;
     margin: 0;
 }
 

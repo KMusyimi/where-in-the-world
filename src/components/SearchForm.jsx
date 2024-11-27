@@ -22,9 +22,7 @@ export default function SearchForm(props) {
     function handleFilterCountries(e) {
         e.preventDefault();
         const {value} = e.target;
-        const results = []
         e.target.focus();
-
         setDisplayContainer(true);
 
         if (!value) {
@@ -32,7 +30,6 @@ export default function SearchForm(props) {
             setDisplayContainer(false);
             return;
         }
-
         const countryRegx = new RegExp('^' + value, 'i');
 
         const filteredArr = searchData.filter(data => {
@@ -40,11 +37,6 @@ export default function SearchForm(props) {
                 return data;
             }
         });
-        for (let i = 0; i < searchData.length; i++) {
-            if (countryRegx.test(searchData[i].name)) {
-                results.push(searchData[i]);
-            }
-        }
         setResults(filteredArr);
     }
 
@@ -62,6 +54,7 @@ export default function SearchForm(props) {
             </figure>
         </Link>)
     );
+
     return (<>
         <div className={'form-container'}>
             <Form method={'get'} action={'results'}>
@@ -81,12 +74,13 @@ export default function SearchForm(props) {
             </Form>
         </div>
         {displayContainer && <div className={'results-container'}>
-            <div className={'btn-wrapper'}>
+            <div className={'btn-wrapper d-flex'}>
+                <p>Results list</p>
                 <button type='button'
                         onClick={() => {
                             document.querySelector('#search').value = '';
                             setDisplayContainer(false);
-                        }} className={'close-button'}>
+                        }} className={'close-button d-flex'}>
                     <IoIosCloseCircleOutline/>
                 </button>
             </div>

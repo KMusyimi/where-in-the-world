@@ -22,6 +22,7 @@ export default function SearchForm(props) {
     function handleFilterCountries(e) {
         e.preventDefault();
         const {value} = e.target;
+        const res = []
         e.target.focus();
 
         setDisplayContainer(true);
@@ -32,9 +33,17 @@ export default function SearchForm(props) {
             return;
         }
 
-        const countryRegx = new RegExp('^' + value);
-        console.log(searchData.filter(data => data.name.match(countryRegx)));
-        setResults(searchData.filter(data =>  data.name.match(countryRegx)));
+        const countryRegx = new RegExp('^' + value, 'i');
+
+        const filteredArr = searchData.filter(data => countryRegx.test(data.name));
+        for (let i = 0; i < searchData.length; i++) {
+            if (countryRegx.test(searchData[i].name)) {
+                res.push(searchData[i]);
+                console.log(searchData[i]);
+
+            }
+        }
+        setResults(res);
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (

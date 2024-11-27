@@ -7,27 +7,25 @@ import {searchData} from "../api.js";
 
 export default function SearchForm() {
     const [results, setResults] = useState([]);
-    const [displayContainer, setDisplayContainer] = useState(false);
 
     function handleFilterCountries(e) {
         e.preventDefault();
         const {value} = e.target;
         e.target.focus();
-        setDisplayContainer(true);
 
         if (!value) {
             setResults([]);
-            setDisplayContainer(false);
             return;
         }
         const countryRegx = new RegExp('^' + value, 'i');
 
-        const filteredArr = searchData.filter(data => {
+        const filteredResults = searchData.filter(data => {
             if (countryRegx.test(data.name)) {
                 return data;
             }
         });
-        setResults(filteredArr);
+
+        setResults(()=> filteredResults.length > 10 ? filteredResults.slice(0, 10) : filteredResults);
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (
@@ -63,13 +61,12 @@ export default function SearchForm() {
                 </div>
             </Form>
         </div>
-        {displayContainer && <div className={'results-container'}>
+        {<div className={'results-container'}>
             <div className={'btn-wrapper d-flex'}>
                 <p>Results list</p>
                 <button type='button'
                         onClick={() => {
                             document.querySelector('#search').value = '';
-                            setDisplayContainer(false);
                         }} className={'close-button d-flex'}>
                     <IoIosCloseCircleOutline/>
                 </button>

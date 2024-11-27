@@ -63,9 +63,10 @@
 }
 
 /*header styles*/
-#root:has(.search-input:not(:placeholder-shown)){
+#root:has(.search-input:not(:placeholder-shown)) {
     position: fixed;
 }
+
 .header {
     background-color: var(--elements-color);
     box-shadow: 0 0 3px var(--elements-box-shadow);
@@ -107,7 +108,8 @@
     justify-content: center;
     padding-inline: 1em;
 }
-.main:has(> .main-nav > .search-container input:not(:placeholder-shown)):before{
+
+.main:has(> .main-nav > .search-container input:not(:placeholder-shown)):before {
     content: '';
     background-color: rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(5px);
@@ -131,6 +133,18 @@
     width: min(100%, 500px);
     z-index: 2000;
 
+}
+.search-container:has(input:placeholder-shown) .results-container,
+.search-container:has(input:placeholder-shown) .results-container > * {
+    height: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+.search-container:has(input:not(:placeholder-shown)) .results-container,
+.search-container:has(input:not(:placeholder-shown)) .results-container > * {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 150ms ease-in-out;
 }
 
 .main-nav .input-container {
@@ -175,16 +189,19 @@
 }
 
 .results-container {
+    position: absolute;
     width: 100%;
     border-radius: .335em;
 }
-.results-container >div {
+
+.results-container > div {
     justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: .65em .5em;
 }
-.results-container >div p{
+
+.results-container > div p {
     font-size: .85rem;
 }
 
@@ -193,6 +210,7 @@
     color: #FF4545;
     font-size: 2rem;
 }
+
 .results-container > ul {
     background-color: var(--elements-color);
     padding: 1.5em;
@@ -201,11 +219,13 @@
     overflow-y: auto;
     scroll-behavior: smooth;
 }
+
 .result-links {
     display: block;
     margin-bottom: 1.25em;
 }
-.result-links:last-child{
+
+.result-links:last-child {
     margin-bottom: 0;
 }
 
@@ -220,9 +240,11 @@
     border-radius: 50%;
     box-shadow: 0 0 6px var(--elements-box-shadow);
 }
+
 .result-links figcaption {
     overflow: hidden;
 }
+
 .result-links h1 {
     font-size: .956rem;
     text-wrap: nowrap;
@@ -282,7 +304,7 @@
     max-height: 350px;
     opacity: 1;
     visibility: visible;
-    transition: max-height 600ms cubic-bezier(.57, .21, .69, 1.25), opacity 300ms ease-in-out;
+    transition: visibility 0ms, max-height 600ms cubic-bezier(.57, .21, .69, 1.25), opacity 300ms ease-in-out 100ms;
 }
 
 .dropdown-btn + .tags-container button {

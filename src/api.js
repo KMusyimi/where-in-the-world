@@ -21,8 +21,7 @@ export async function getCountries() {
                 population: country.population,
                 alt: country.flags.alt
             }
-        })
-        searchData = searchData.sort((a, b) => b.population - a.population);
+        }).sort((a, b) => b.population - a.population);
     }
 
     return countries;

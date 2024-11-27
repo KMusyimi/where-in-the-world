@@ -16,7 +16,7 @@ export default function SearchForm() {
             setResults([]);
             return;
         }
-        const countryRegx = new RegExp('^' + value, 'i');
+        const countryRegx = new RegExp('^' + value.trim(), 'i');
         const filteredResults = searchData.filter(data => {
             if (countryRegx.test(data.name)) return data;
         });

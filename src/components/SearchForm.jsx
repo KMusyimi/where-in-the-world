@@ -10,22 +10,18 @@ export default function SearchForm() {
 
     function handleFilterCountries(e) {
         e.preventDefault();
-        const {value} = e.target;
         e.target.focus();
-
+        const {value} = e.target;
         if (!value) {
             setResults([]);
             return;
         }
         const countryRegx = new RegExp('^' + value, 'i');
-
         const filteredResults = searchData.filter(data => {
-            if (countryRegx.test(data.name)) {
-                return data;
-            }
+            if (countryRegx.test(data.name)) return data;
         });
 
-        setResults(()=> filteredResults.length > 10 ? filteredResults.slice(0, 10) : filteredResults);
+        setResults(() => filteredResults.length > 10 ? filteredResults.slice(0, 10) : filteredResults);
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (

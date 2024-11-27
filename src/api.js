@@ -31,7 +31,8 @@ export async function getPageData(param) {
     if (!param) {
         return [];
     }
-    await sleep(500);
+    // allow ui to scroll up
+    await sleep(200);
     const fields = ['name', 'population', 'region', 'capital', 'flags',
         'subregion', 'tld', 'languages', 'currencies', 'borders'];
 
@@ -48,9 +49,9 @@ export async function getPageData(param) {
     }
     const countryData = await resp.json();
 
-    const data = async (country) => {
+    const getBorderCountries = async (country) => {
         if (country.borders.length > 0) {
-            const url = `https://restcountries.com/v3.1/alpha?codes=${country.borders.join(',')}`;
+            const url = `https://restcountries.com/v3.1/alpha?codes=${country.borders.join(',').toLowerCase()}`;
             const resp = await fetch(url);
             if (!resp.ok) {
                 throw {
@@ -61,7 +62,7 @@ export async function getPageData(param) {
             countryData[0].borders = getName(data);
         }
     }
-    await data(...countryData);
+    await getBorderCountries(...countryData);
     return countryData[0];
 }
 

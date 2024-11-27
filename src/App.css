@@ -199,6 +199,7 @@
     border-radius: inherit;
     max-height: 330px;
     overflow-y: auto;
+    scroll-behavior: smooth;
 }
 .result-links {
     display: block;

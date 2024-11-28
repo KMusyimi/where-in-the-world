@@ -54,7 +54,7 @@ export default function Homepage() {
                         {capital?.join(', ') || 'has no capital'}</p>
                 </section>
                 <figure className={'flag-wrapper'}>
-                    <img className={'flag'} src={flags?.svg} alt={flags?.alt || `The flag of ${name.common}`}
+                    <img className={'flag'} src={flags?.png} alt={flags?.alt || `The flag of ${name.common}`}
                          loading={'lazy'}/>
                 </figure>
             </Link>)

@@ -66,7 +66,7 @@ export default function Details() {
                         border countries</h2>}
                 </section>
                 <figure className={'flag-wrapper'}>
-                    <img className={'flag'} src={`${flags.svg}`}
+                    <img className={'flag'} src={`${flags.png}`}
                          alt={flags?.alt || `The flag for ${name.common}`}
                     />
                 </figure>

@@ -10,20 +10,18 @@ export async function getCountries() {
             status: resp.status, statusText: resp.statusText, message: 'Could not get Countries'
         }
     }
-    const countries = await resp.json();
 
+    const countries = await resp.json();
     if (searchData.length === 0) {
         searchData = countries.map(country => {
             return {
-                name: country.name.common.toLowerCase().trim(),
+                name: country.name.common.trim(),
                 flags: country.flags.png,
                 capital: country.capital.join(', '),
-                population: country.population,
                 alt: country.flags.alt
             }
-        }).sort((a, b) => b.population - a.population);
+        })
     }
-
     return countries;
 }
 
@@ -31,8 +29,7 @@ export async function getPageData(param) {
     if (!param) {
         return [];
     }
-    // allow ui to scroll up
-    await sleep(200);
+
     const fields = ['name', 'population', 'region', 'capital', 'flags',
         'subregion', 'tld', 'languages', 'currencies', 'borders'];
 
@@ -63,6 +60,8 @@ export async function getPageData(param) {
         }
     }
     await getBorderCountries(...countryData);
+    // allow ui to scroll up
+    await sleep(200);
     return countryData[0];
 }
 

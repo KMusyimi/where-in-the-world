@@ -16,7 +16,6 @@ export default function Homepage() {
     const data = useLoaderData();
     const [searchParams] = useSearchParams();
     const regionFilter = searchParams.get("region");
-
     const sortedCountries = data.sort((a, b) => a.name.common > b.name.common ? 1 : -1);
 
     const countriesArr = regionFilter ? sortedCountries
@@ -33,9 +32,23 @@ export default function Homepage() {
                 btn.style.display = 'none';
             }
         });
+        if (data.length) {
+            const scrollPosition = sessionStorage.getItem('scrollPosition');
+            if (scrollPosition) {
+                setTimeout(() => {
+                    window.scrollTo({top: parseInt(scrollPosition, 10), behavior: 'instant'});
+                    sessionStorage.removeItem('scrollPosition');
+                }, 75)
+            }
+        }
+    }, [data]);
 
-    }, []);
 
+    const handleClick = (e) => {
+        const yPos = e.target.getBoundingClientRect().top - (e.target
+            .getBoundingClientRect().top - window.scrollY);
+        sessionStorage.setItem('scrollPosition', yPos)
+    }
 
     const countries = countriesArr.map((country, idx) => {
         const {capital, flags, population, region, name} = country;
@@ -43,7 +56,8 @@ export default function Homepage() {
             <Link key={`c-${idx}`}
                   id={`${name.common.replace(/\s+/g, '+').toLowerCase()}`}
                   to={`page/?country=${name.common.replace(/\s+/g, '+').toLowerCase()}`}
-                  className={'country-card d-flex fx-direction--column'}>
+                  className={'country-card d-flex fx-direction--column'}
+                  onClick={handleClick}>
                 <section className={'country-info'}>
                     <h1 className={'fw-800'}>{name.common}</h1>
                     <p><span className={'fw-600 txt-caps'}>population:</span>

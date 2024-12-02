@@ -38,7 +38,7 @@ export default function Homepage() {
                 setTimeout(() => {
                     window.scrollTo({top: parseInt(scrollPosition, 10), behavior: 'instant'});
                     sessionStorage.removeItem('scrollPosition');
-                }, 75)
+                }, 75);
             }
         }
     }, [data]);

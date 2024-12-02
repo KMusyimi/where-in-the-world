@@ -3,7 +3,7 @@ import {IoIosCloseCircleOutline} from "react-icons/io";
 
 import {IoSearch} from "react-icons/io5";
 import {useState} from "react";
-import {searchData} from "../api.js";
+import {searchDataJSON} from "../api.js";
 import {PrioritizeResults} from "../utils.js";
 
 export default function SearchForm() {
@@ -13,6 +13,7 @@ export default function SearchForm() {
         e.preventDefault();
         e.target.focus();
         const {value} = e.target;
+        const searchData = JSON.parse(searchDataJSON)
         if (!value) {
             setResults([]);
             return;

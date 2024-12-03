@@ -53,7 +53,8 @@ export default function Details() {
                                 className='fw-600 txt-caps'>capital:</span>{capital?.join(', ') || 'no capital'}</p>
                         </div>
                         <div>
-                            <p className={'tld'}><span className='fw-600 txt-caps'>top level domain:</span>{tld}</p>
+                            <p className={'tld'}><span
+                                className='fw-600 txt-caps'>top level domain:</span>{tld? tld[0]: 'no tld'}</p>
                             <p><span className='currencies fw-600 txt-caps'>currencies:</span>{currency}</p>
                             <p><span className='languages fw-600 txt-caps'>languages:</span>{langs}</p>
                         </div>

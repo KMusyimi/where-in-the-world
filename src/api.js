@@ -61,7 +61,6 @@ export async function getPageData(param) {
         }
     }
     const countryData = await resp.json();
-
     const getBorderCountries = async (country) => {
         if (country.borders.length > 0) {
             const url = `https://restcountries.com/v3.1/alpha?codes=${country.borders.join(',').toLowerCase()}&&fields=name`;

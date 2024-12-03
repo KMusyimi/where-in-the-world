@@ -13,7 +13,6 @@ export async function resultsLoader({request}) {
             return data;
         }
     });
-    console.log(results, query);
     if (results.length === 0) {
         throw {message: `Could not find any results for ${query}`};
     }

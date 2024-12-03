@@ -7,16 +7,17 @@ export async function resultsLoader({request}) {
     const {url} = request;
     const searchData = JSON.parse(searchDataJSON);
     const query = new URL(url).searchParams.get('search_query');
-    const rgx = new RegExp(`^${query}.*$`, 'i');
+    const rgx = new RegExp(`.*${query}`, 'i');
     const results = searchData.filter(data => {
         if (rgx.test(data.name)) {
             return data;
         }
     });
+    console.log(results, query);
     if (results.length === 0) {
-        throw {message: "Search results not match"};
+        throw {message: `Could not find any results for ${query}`};
     }
-    return await getResults(results.length > 10 ? results.slice(0, 10) : results);
+    return await getResults(results);
 }
 
 export default function Results() {

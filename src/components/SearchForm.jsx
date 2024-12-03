@@ -21,7 +21,7 @@ export default function SearchForm() {
         // ^.* everything from, including the beginning of the line
         // value the requested pattern
         // .*$ everything after the pattern, including the end of the line
-        let pattern = value.length === 1 ? `^${value.trim()}` : `^.*${value.trim()}.*$`;
+        const pattern = value.length === 1 ? `^${value.trim()}` : `^.*${value.trim()}.*$`;
 
         const countryRegx = new RegExp( pattern, 'i');
         const filteredResults = searchData.filter(data => {

@@ -31,12 +31,13 @@ export async function getCountries() {
     if (searchDataJSON.length === 0) {
         searchDataJSON = JSON.stringify(countries.map(country => {
             return {
-                name: country.name.common.trim(),
+                name: country.name.common,
                 flags: country.flags.png,
                 capital: country.capital.join(', '),
                 alt: country.flags.alt
             }
         }))
+        console.log(searchDataJSON);
     }
     return countries;
 }

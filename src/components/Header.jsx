@@ -35,9 +35,8 @@ export default function Header() {
         setTheme(newTheme);
     }
 
-    return (
-        <header className={'header d-flex'}>
-            <Link className={'fw-800'} to='/'>Where in the world?</Link>
-            <Around duration={750} onClick={handleClick}/>
-        </header>)
+    return (<header className={'header d-flex'}>
+        <Link className={'fw-800'} to='/'>Where in the world?</Link>
+        <Around duration={750} onClick={handleClick}/>
+    </header>)
 }

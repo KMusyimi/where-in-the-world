@@ -38,7 +38,7 @@ export default function Details() {
 
     return (
         <div className={'details-container'}>
-            {<BackButton/>}
+            <BackButton/>
             <section className='page'>
                 <section>
                     <h1 className={'fw-800'}>{name.common}</h1>

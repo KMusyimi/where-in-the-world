@@ -4,7 +4,7 @@ import {IoIosCloseCircleOutline} from "react-icons/io";
 import {IoSearch} from "react-icons/io5";
 import {useState} from "react";
 import {searchDataJSON} from "../api.js";
-import {PrioritizeResults} from "../utils.js";
+import {prioritizeResults} from "../utils.js";
 
 export default function SearchForm() {
     const [results, setResults] = useState([]);
@@ -21,13 +21,13 @@ export default function SearchForm() {
         // ^.* everything from, including the beginning of the line
         // value the requested pattern
         // .*$ everything after the pattern, including the end of the line
-        let pattern = value.length === 1 ? `^${value}` : `^.*${value.trim()}.*$`;
+        let pattern = value.length === 1 ? `^${value.trim()}` : `^.*${value.trim()}.*$`;
 
         const countryRegx = new RegExp( pattern, 'i');
         const filteredResults = searchData.filter(data => {
             if (countryRegx.test(data.name)) return data;
         });
-        const prioritizedArr = PrioritizeResults(filteredResults, value);
+        const prioritizedArr = prioritizeResults(filteredResults, value);
         setResults(() => prioritizedArr.length > 10 ? prioritizedArr.slice(0, 10) : prioritizedArr);
     }
 

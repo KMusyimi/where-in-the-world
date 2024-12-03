@@ -1,6 +1,22 @@
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 export let searchDataJSON = [];
 
+export async function getResults(results) {
+    return Promise.all(results.map(async endpoint => {
+        const url = `https://restcountries.com/v3.1/name/${endpoint.name.toLowerCase()}?fullText=true
+        &&fields=name,population,region,capital,flags`
+        const resp = await fetch(url);
+        if (!resp.ok) {
+            throw {
+                status: resp.status, statusText: resp.statusText, message: 'Could not get Countries'
+            }
+        }
+        const results = await resp.json();
+        const s = (data)=> (data)
+        return s(...results);
+    }));
+
+}
 
 export async function getCountries() {
     const url = 'https://restcountries.com/v3.1/all?fields=name,population,region,capital,flags';
@@ -12,7 +28,6 @@ export async function getCountries() {
     }
 
     const countries = await resp.json();
-
     if (searchDataJSON.length === 0) {
         searchDataJSON = JSON.stringify(countries.map(country => {
             return {

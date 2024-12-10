@@ -1,44 +1,38 @@
 import {getPageData} from "../api.js";
-import {Link, useLoaderData, useNavigation} from "react-router-dom";
+import {Await, Link, useLoaderData, useNavigation} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import BackButton from "../components/BackButton.jsx";
 import {Spinner} from "../components/Spinner.jsx";
+import {Suspense} from "react";
 
 
 export async function detailsLoader({request}) {
     const req = new URL(request.url).searchParams.get('country');
-    return await getPageData(req);
+    return {details:getPageData(req)};
 }
 
 export default function Details() {
-    const country = useLoaderData();
-    const navigation = useNavigation();
-    window.scrollTo({top: 0, behavior: "auto"});
-
-    if (navigation.state === 'loading') {
-        return (<Spinner/>)
-    }
-
-    const {
-        name, population, region, capital, flags, subregion, tld, languages, currencies, borders
-    } = country;
+    const countryData = useLoaderData();
     const isEmpty = (obj) => Object.keys(obj).length === 0;
 
-    const nativeName = !isEmpty(name.nativeName) ? Object.values(name.nativeName)[0]?.common : 'no native name';
-    const currency = !isEmpty(currencies) ? Object.values(currencies)[0].name : "no currency";
+    function renderPage(country){
+        window.scrollTo({top: 0, behavior: "auto"});
 
-    const langs = !isEmpty(languages) ? Object.values(languages).join(', ') : 'no languages';
+        const {
+            name, population, region, capital, flags, subregion, tld, languages, currencies, borders
+        } = country;
 
-    const links = borders.length > 0 && borders.map((country, idx) => <Link className={'country-link'}
-                                                                            key={`link-${idx}`}
-                                                                            to={`/page/?country=${country
-                                                                                .replace(/\s+/g, '+')
-                                                                                .toLowerCase()}`}>{country}</Link>);
+        const nativeName = !isEmpty(name.nativeName) ? Object.values(name.nativeName)[0]?.common : 'no native name';
+        const currency = !isEmpty(currencies) ? Object.values(currencies)[0].name : "no currency";
 
+        const langs = !isEmpty(languages) ? Object.values(languages).join(', ') : 'no languages';
 
-    return (
-        <div className={'details-container'}>
-            <BackButton/>
+        const links = borders.length > 0 && borders.map((country, idx) => <Link className={'country-link'}
+                                                                                key={`link-${idx}`}
+                                                                                to={`/page/?country=${country
+                                                                                    .replace(/\s+/g, '+')
+                                                                                    .toLowerCase()}`}>{country}</Link>);
+        return (
             <section className='page'>
                 <section>
                     <h1 className={'fw-800'}>{name.common}</h1>
@@ -54,7 +48,7 @@ export default function Details() {
                         </div>
                         <div>
                             <p className={'tld'}><span
-                                className='fw-600 txt-caps'>top level domain:</span>{tld? tld[0]: 'no tld'}</p>
+                                className='fw-600 txt-caps'>top level domain:</span>{tld ? tld[0] : 'no tld'}</p>
                             <p><span className='currencies fw-600 txt-caps'>currencies:</span>{currency}</p>
                             <p><span className='languages fw-600 txt-caps'>languages:</span>{langs}</p>
                         </div>
@@ -72,5 +66,16 @@ export default function Details() {
                     />
                 </figure>
             </section>
+        )
+    }
+
+    return (
+        <div className={'details-container'}>
+            <BackButton/>
+            <Suspense fallback={<Spinner/>}>
+                <Await resolve={countryData.details}>
+                    {renderPage}
+                </Await>
+            </Suspense>
         </div>)
 }

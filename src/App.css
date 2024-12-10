@@ -338,6 +338,9 @@
     padding-inline: 2em;
     gap: 3em;
 }
+.countries-container:has(>.spinner-container){
+    display: block;
+}
 
 .countries-container > .country-card {
     background-color: var(--elements-color);
@@ -555,7 +558,7 @@ footer{
     }
 
     .details-container .page {
-        grid-template-columns: repeat(2, minmax(300px, 1fr));
+        grid-template-columns: repeat(2, minmax(250px, 1fr));
         gap: 8em;
     }
 
@@ -564,8 +567,8 @@ footer{
     }
 
     .details-container .page > figure {
-        height: fit-content;
-        width: fit-content;
+        min-height: 250px;
+        min-width: 350px;
     }
 
     .details-container .page > figure img {

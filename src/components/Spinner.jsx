@@ -1,14 +1,10 @@
 export function Spinner() {
     return (
-        <div className={'spinner-container'}>
-            <div className="sk-chase">
-                <div className="sk-chase-dot"></div>
-                <div className="sk-chase-dot"></div>
-                <div className="sk-chase-dot"></div>
-                <div className="sk-chase-dot"></div>
-                <div className="sk-chase-dot"></div>
-                <div className="sk-chase-dot"></div>
+        <div className='spinner-container'>
+            <div className="spinner">
+                <div className="double-bounce1"></div>
+                <div className="double-bounce2"></div>
             </div>
         </div>
-)
+    )
 }

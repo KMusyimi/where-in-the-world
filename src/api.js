@@ -12,8 +12,8 @@ export async function getResults(results) {
             }
         }
         const results = await resp.json();
-        const s = (data)=> (data)
-        return s(...results);
+        const searchResults = (data)=> (data)
+        return searchResults(...results);
     }));
 
 }
@@ -37,7 +37,6 @@ export async function getCountries() {
                 alt: country.flags.alt
             }
         }))
-        console.log(searchDataJSON);
     }
     return countries;
 }

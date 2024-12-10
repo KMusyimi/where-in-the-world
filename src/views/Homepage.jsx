@@ -9,15 +9,15 @@ import {CountryCards} from "../components/CountryCards.jsx";
 export const HomepageContext = createContext('');
 
 export async function homepageLoader() {
-    return await getCountries();
+    const countries = getCountries();
+    return {countries};
 }
 
 export default function Homepage() {
     const data = useLoaderData();
+
     const [searchParams] = useSearchParams();
     const regionFilter = searchParams.get("region");
-
-    const countriesArr = regionFilter ? data.filter(country => regionFilter === country.region.toLowerCase()) : data;
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -30,21 +30,12 @@ export default function Homepage() {
                 btn.style.display = 'none';
             }
         });
-        if (data.length) {
-            const scrollPosition = sessionStorage.getItem('scrollPosition');
-            if (scrollPosition) {
-                setTimeout(() => {
-                    window.scrollTo({top: parseInt(scrollPosition, 10), behavior: 'instant'});
-                    sessionStorage.removeItem('scrollPosition');
-                }, 75);
-            }
-        }
-    }, [data]);
+    }, []);
 
 
     const handleClick = (e) => {
         const yPos = e.target.getBoundingClientRect().top - (e.target
-            .getBoundingClientRect().top - window.scrollY);
+            .getBoundingClientRect().top - window.scrollY + 50);
         sessionStorage.setItem('scrollPosition', yPos)
     }
 
@@ -53,7 +44,7 @@ export default function Homepage() {
             <div className={'search-container'}>{<SearchForm/>}</div>
             {<HomepageContext.Provider value={regionFilter}> <FiltersContainer/> </HomepageContext.Provider>}
         </div>
-        <CountryCards data={countriesArr} handleClick={handleClick}/>
+        <CountryCards data={data} handleClick={handleClick} filter={regionFilter}/>
         <button type={'button'} id={'back-to-top'} className={'btn-top'} style={{display: 'none'}}
                 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             <HiMiniArrowUpCircle/></button>

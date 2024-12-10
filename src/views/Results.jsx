@@ -16,15 +16,17 @@ export async function resultsLoader({request}) {
     if (results.length === 0) {
         throw {message: `Could not find any results for ${query}`};
     }
-    return await getResults(results);
+
+    return {country: getResults(results)};
 }
 
 export default function Results() {
-    const results = useLoaderData();
+    const countriesArr = useLoaderData();
+
     return (
         <>
             <BackButton/>
-            <CountryCards data={results}/>
+            <CountryCards data={countriesArr}/>
         </>
     )
 }

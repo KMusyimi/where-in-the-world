@@ -6,6 +6,7 @@ import {useState} from "react";
 import {searchDataJSON} from "../api.js";
 import {prioritizeResults} from "../utils.js";
 
+
 export default function SearchForm() {
     const [results, setResults] = useState([]);
 

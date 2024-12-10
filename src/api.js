@@ -19,6 +19,7 @@ export async function getResults(results) {
 }
 
 export async function getCountries() {
+
     const url = 'https://restcountries.com/v3.1/all?fields=name,population,region,capital,flags';
     const resp = await fetch(url);
     if (!resp.ok) {

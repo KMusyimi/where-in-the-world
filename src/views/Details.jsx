@@ -1,5 +1,5 @@
 import {getPageData} from "../api.js";
-import {Await, Link, useLoaderData, useNavigation} from "react-router-dom";
+import {Await, Link, useLoaderData} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import BackButton from "../components/BackButton.jsx";
 import {Spinner} from "../components/Spinner.jsx";
@@ -8,14 +8,14 @@ import {Suspense} from "react";
 
 export async function detailsLoader({request}) {
     const req = new URL(request.url).searchParams.get('country');
-    return {details:getPageData(req)};
+    return {details: getPageData(req)};
 }
 
 export default function Details() {
     const countryData = useLoaderData();
     const isEmpty = (obj) => Object.keys(obj).length === 0;
 
-    function renderPage(country){
+    function renderPage(country) {
         window.scrollTo({top: 0, behavior: "auto"});
 
         const {

@@ -30,21 +30,23 @@ export default function Homepage() {
                 btn.style.display = 'none';
             }
         });
+        const scrollPosition = sessionStorage.getItem('scrollPosition');
+        if (scrollPosition) {
+            setTimeout(() => {
+                window.scrollTo({top: parseInt(scrollPosition, 10), behavior: 'instant'});
+                sessionStorage.removeItem('scrollPosition');
+                console.log(scrollPosition);
+            }, 75);
+        }
     }, []);
 
-
-    const handleClick = (e) => {
-        const yPos = e.target.getBoundingClientRect().top - (e.target
-            .getBoundingClientRect().top - window.scrollY + 50);
-        sessionStorage.setItem('scrollPosition', yPos)
-    }
 
     return (<>
         <div className='main-nav'>
             <div className={'search-container'}>{<SearchForm/>}</div>
             {<HomepageContext.Provider value={regionFilter}> <FiltersContainer/> </HomepageContext.Provider>}
         </div>
-        <CountryCards data={data} handleClick={handleClick} filter={regionFilter}/>
+        <CountryCards data={data} filter={regionFilter}/>
         <button type={'button'} id={'back-to-top'} className={'btn-top'} style={{display: 'none'}}
                 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             <HiMiniArrowUpCircle/></button>

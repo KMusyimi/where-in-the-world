@@ -1,20 +1,18 @@
 import {Await, Link} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
-import {Suspense, useEffect} from "react";
+import {Suspense, useRef} from "react";
 import {Spinner} from "./Spinner.jsx";
 
 // eslint-disable-next-line react/prop-types
-export function CountryCards({data, handleClick, filter}) {
+export function CountryCards({data, filter}) {
+    const linkRef = useRef(null);
 
-    useEffect(() => {
-        const scrollPosition = sessionStorage.getItem('scrollPosition');
-        if (scrollPosition) {
-            setTimeout(() => {
-                window.scrollTo({top: parseInt(scrollPosition, 10), behavior: 'instant'});
-                sessionStorage.removeItem('scrollPosition');
-            }, 75);
-        }
-    }, [])
+    const handleClick = () => {
+        const yPos = linkRef.current.getBoundingClientRect().top
+        // const yPos = e.target.getBoundingClientRect().top - (e.target
+        //     .getBoundingClientRect().top - window.scrollY + 50);
+        sessionStorage.setItem('scrollPosition', yPos)
+    }
 
     function renderCountries(arr) {
         return arr.map((country, idx) => {
@@ -25,6 +23,7 @@ export function CountryCards({data, handleClick, filter}) {
                       to={`/page/?country=${name.common.replace(/\s+/g, '+').toLowerCase()}`}
                       className={'country-card d-flex fx-direction--column'}
                       onClick={handleClick}
+                      ref={linkRef}
                 >
                     <section className={'country-info'}>
                         <h1 className={'fw-800'}>{name.common}</h1>
@@ -44,18 +43,19 @@ export function CountryCards({data, handleClick, filter}) {
     }
 
     return (
-        <div className={'countries-container'}>{
-            <Suspense fallback={<Spinner/>}>
-                {/* eslint-disable-next-line react/prop-types */}
-                <Await resolve={data?.countries}>
-                    {(loadedCountries) => {
-                        const countriesArr = filter ?
-                            loadedCountries.filter(country => filter === country.region.toLowerCase()) : loadedCountries;
-                        const sortedCountries = countriesArr.sort((a, b) => a.name.common > b.name.common ? 1 : -1);
-                        return renderCountries(sortedCountries);
-                    }}
-                </Await>
-            </Suspense>
-        }</div>
+        <div className={'countries-container'}>
+            {
+                <Suspense fallback={<Spinner/>}>
+                    {/* eslint-disable-next-line react/prop-types */}
+                    <Await resolve={data?.countries}>
+                        {(loadedCountries) => {
+                            const countriesArr = filter ?
+                                loadedCountries.filter(country => filter === country.region.toLowerCase()) : loadedCountries;
+                            const sortedCountries = countriesArr.sort((a, b) => a.name.common > b.name.common ? 1 : -1);
+                            return renderCountries(sortedCountries);
+                        }}
+                    </Await>
+                </Suspense>
+            }</div>
     )
 }

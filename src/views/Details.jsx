@@ -12,11 +12,11 @@ export async function detailsLoader({request}) {
 }
 
 export default function Details() {
+    window.scrollTo({top: 0, behavior: "auto"});
     const countryData = useLoaderData();
     const isEmpty = (obj) => Object.keys(obj).length === 0;
 
     function renderPage(country) {
-        window.scrollTo({top: 0, behavior: "auto"});
 
         const {
             name, population, region, capital, flags, subregion, tld, languages, currencies, borders

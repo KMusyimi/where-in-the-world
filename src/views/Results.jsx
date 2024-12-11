@@ -1,5 +1,5 @@
 import {getResults, searchDataJSON} from "../api.js";
-import {useLoaderData} from "react-router-dom";
+import {ScrollRestoration, useLoaderData} from "react-router-dom";
 import BackButton from "../components/BackButton.jsx";
 import {CountryCards} from "../components/CountryCards.jsx";
 
@@ -17,7 +17,7 @@ export async function resultsLoader({request}) {
         throw {message: `Could not find any results for ${query}`};
     }
 
-    return {country: getResults(results)};
+    return {countries: getResults(results)};
 }
 
 export default function Results() {

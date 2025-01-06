@@ -235,8 +235,8 @@
 
 .result-links img {
     width: 45px;
-    height: 45px;
-    border-radius: 50%;
+    height: 35px;
+    border-radius: .12em;
     box-shadow: 0 0 6px var(--elements-box-shadow);
 }
 
@@ -245,14 +245,14 @@
 }
 
 .result-links h1 {
-    font-size: .956rem;
+    font-size: .866rem;
     text-wrap: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 .result-links p {
-    font-size: .9rem;
+    font-size: .8rem;
 }
 
 .filter-container {

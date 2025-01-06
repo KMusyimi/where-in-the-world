@@ -1,5 +1,4 @@
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-export let searchDataJSON = [];
+export let searchDataJSON = '';
 
 export async function getResults(results) {
     return Promise.all(results.map(async endpoint => {
@@ -29,7 +28,7 @@ export async function getCountries() {
     }
 
     const countries = await resp.json();
-    if (searchDataJSON.length === 0) {
+    if (!searchDataJSON) {
         searchDataJSON = JSON.stringify(countries.map(country => {
             return {
                 name: country.name.common,
@@ -76,8 +75,6 @@ export async function getPageData(param) {
         }
     }
     await getBorderCountries(...countryData);
-    // allow ui to scroll up
-    await sleep(300);
     return countryData[0];
 }
 

@@ -1,5 +1,5 @@
 import {getResults, searchDataJSON} from "../api.js";
-import {ScrollRestoration, useLoaderData} from "react-router-dom";
+import {useLoaderData} from "react-router-dom";
 import BackButton from "../components/BackButton.jsx";
 import {CountryCards} from "../components/CountryCards.jsx";
 

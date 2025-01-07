@@ -8,6 +8,7 @@ import {Suspense} from "react";
 
 export async function detailsLoader({request}) {
     const req = new URL(request.url).searchParams.get('country');
+    console.log(req);
     return {details: getPageData(req)};
 }
 

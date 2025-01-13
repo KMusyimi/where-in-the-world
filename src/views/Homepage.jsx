@@ -33,10 +33,9 @@ export default function Homepage() {
         const scrollPosition = sessionStorage.getItem('scrollPosition');
         if (scrollPosition) {
             setTimeout(() => {
-                window.scrollTo({top: parseInt(scrollPosition, 10), behavior: 'instant'});
+                window.scrollBy({top: parseInt(scrollPosition, 10), left: 0, behavior: 'smooth'});
                 sessionStorage.removeItem('scrollPosition');
-                console.log(scrollPosition);
-            }, 75);
+            }, 150);
         }
     }, []);
 

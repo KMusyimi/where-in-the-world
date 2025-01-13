@@ -1,16 +1,13 @@
 import {Await, Link} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
-import {Suspense, useRef} from "react";
+import {Suspense} from "react";
 import {Spinner} from "./Spinner.jsx";
 
 // eslint-disable-next-line react/prop-types
 export function CountryCards({data, filter}) {
-    const linkRef = useRef(null);
 
-    const handleClick = () => {
-        const yPos = linkRef.current.getBoundingClientRect().top
-        // const yPos = e.target.getBoundingClientRect().top - (e.target
-        //     .getBoundingClientRect().top - window.scrollY + 50);
+    const handleClick = (e) => {
+        const yPos = Math.floor(window.scrollY) - 100;
         sessionStorage.setItem('scrollPosition', yPos)
     }
 
@@ -23,7 +20,6 @@ export function CountryCards({data, filter}) {
                       to={`/page/?country=${name.common.replace(/\s+/g, '+').toLowerCase()}`}
                       className={'country-card d-flex fx-direction--column'}
                       onClick={handleClick}
-                      ref={linkRef}
                 >
                     <section className={'country-info'}>
                         <h1 className={'fw-800'}>{name.common}</h1>

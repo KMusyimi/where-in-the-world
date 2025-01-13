@@ -18,27 +18,33 @@ export default function Homepage() {
 
     const [searchParams] = useSearchParams();
     const regionFilter = searchParams.get("region");
-
     useEffect(() => {
-        window.addEventListener('scroll', () => {
-            const btn = document.querySelector('#back-to-top');
-            if (btn) {
-                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-                    btn.style.display = '';
-                    return;
-                }
-                btn.style.display = 'none';
-            }
-        });
         const scrollPosition = sessionStorage.getItem('scrollPosition');
+        let scrollTimer = null;
+
+        window.addEventListener('scroll', handleScrollToTop);
         if (scrollPosition) {
-            setTimeout(() => {
+            scrollTimer = setTimeout(() => {
                 window.scrollBy({top: parseInt(scrollPosition, 10), left: 0, behavior: 'smooth'});
                 sessionStorage.removeItem('scrollPosition');
             }, 150);
         }
+        return () => {
+            window.removeEventListener('scroll', handleScrollToTop);
+            clearTimeout(scrollTimer)
+        }
     }, []);
 
+    function handleScrollToTop() {
+        const btn = document.querySelector('#back-to-top');
+        if (btn) {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                btn.style.display = '';
+                return;
+            }
+            btn.style.display = 'none';
+        }
+    }
 
     return (<>
         <div className='main-nav'>

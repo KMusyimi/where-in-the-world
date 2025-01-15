@@ -27,7 +27,7 @@ export default function Homepage() {
             scrollTimer = setTimeout(() => {
                 window.scrollBy({top: parseInt(scrollPosition, 10), left: 0, behavior: 'smooth'});
                 sessionStorage.removeItem('scrollPosition');
-            }, 150);
+            }, 300);
         }
         return () => {
             window.removeEventListener('scroll', handleScrollToTop);

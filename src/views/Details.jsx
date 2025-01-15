@@ -32,8 +32,7 @@ export default function Details() {
                                                                                 to={`/page/?country=${country
                                                                                     .replace(/\s+/g, '+')
                                                                                     .toLowerCase()}`}>{country}</Link>);
-        return (
-            <section className='page'>
+        return (<section className='page'>
                 <section>
                     <h1 className={'fw-800'}>{name.common}</h1>
                     <div className={'details-wrapper'}>
@@ -65,17 +64,15 @@ export default function Details() {
                          alt={flags?.alt || `The flag for ${name.common}`}
                     />
                 </figure>
-            </section>
-        )
+            </section>)
     }
 
-    return (
-        <div className={'details-container'}>
-            <BackButton/>
-            <Suspense fallback={<Spinner/>}>
-                <Await resolve={countryData.details}>
-                    {renderPage}
-                </Await>
-            </Suspense>
-        </div>)
+    return (<div className={'details-container'}>
+        <BackButton/>
+        <Suspense fallback={<Spinner/>}>
+            <Await resolve={countryData.details}>
+                {renderPage}
+            </Await>
+        </Suspense>
+    </div>)
 }

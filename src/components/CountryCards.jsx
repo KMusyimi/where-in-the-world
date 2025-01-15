@@ -1,11 +1,11 @@
 import {Await, Link} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
-import {Suspense} from "react";
+import {Suspense, useState} from "react";
 import {Spinner} from "./Spinner.jsx";
 
 // eslint-disable-next-line react/prop-types
 export function CountryCards({data, filter}) {
-
+    const [sort, setSort] = useState(false);
     const handleClick = (e) => {
         const yPos = Math.floor(window.scrollY) - 100;
         sessionStorage.setItem('scrollPosition', yPos)
@@ -36,16 +36,14 @@ export function CountryCards({data, filter}) {
             </Link>)
         })
     }
-
     return (<div className={'countries-container'}>
         {<Suspense fallback={<Spinner/>}>
             {/* eslint-disable-next-line react/prop-types */}
             <Await resolve={data?.countries}>
                 {(loadedCountries) => {
-                    const loadedCopy = [...loadedCountries];
+                    const loadedCopy = [...loadedCountries].sort((a, b) => a.name.common.localeCompare(b.name.common));
                     const countriesArr = filter ? loadedCopy.filter(country => filter === country.region.toLowerCase()) : loadedCopy;
-                    const sortedCountries = countriesArr.sort((a, b) => a.name.common > b.name.common ? 1 : -1);
-                    return renderCountries(sortedCountries);
+                    return renderCountries(countriesArr);
                 }}
             </Await>
         </Suspense>}</div>)

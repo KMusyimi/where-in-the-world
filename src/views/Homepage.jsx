@@ -17,6 +17,7 @@ export default function Homepage() {
 
     const [searchParams] = useSearchParams();
     const regionFilter = searchParams.get("region");
+
     useEffect(() => {
         const scrollPosition = sessionStorage.getItem('scrollPosition');
         let scrollTimer = null;

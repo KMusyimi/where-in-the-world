@@ -105,8 +105,6 @@
 .main {
     width: 100%;
     height: fit-content;
-    /*align-items: center;*/
-    /*justify-content: center;*/
     padding-inline: 1em;
 }
 

@@ -25,7 +25,7 @@
 
 [data-theme="light"],
 [data-theme="dark"] {
-    transition: color ease-in-out 200ms;
+    transition: all ease-in-out 70ms;
 }
 [data-theme="dark"] {
     color: var(--light-gray);

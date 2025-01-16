@@ -1,7 +1,7 @@
 import {getResults, searchDataJSON} from "../api.js";
 import {useLoaderData} from "react-router-dom";
 import BackButton from "../components/BackButton.jsx";
-import {CountryCards} from "../components/CountryCards.jsx";
+import CountryCards from "../components/CountryCards.jsx";
 
 export async function resultsLoader({request}) {
     const {url} = request;

@@ -1,8 +1,9 @@
 import {decode} from "html-entities";
 import moment from "moment";
 import {Link} from "react-router-dom";
+import {memo} from "react";
 
-export default function Footer() {
+function Footer() {
 
     return (<footer>
         {decode('&copy;')} {moment().year()}
@@ -10,3 +11,5 @@ export default function Footer() {
         <span> Challenge by: <Link to={'https://www.frontendmentor.io/challenges'}> frontendmentor.io </Link></span>
     </footer>)
 }
+
+export default memo(Footer);

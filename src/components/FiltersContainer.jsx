@@ -1,11 +1,9 @@
 import {IoIosArrowDropdown, IoIosCloseCircleOutline} from "react-icons/io";
-import {useContext, useState} from "react";
+import {memo, useContext, useState} from "react";
 import {HomepageContext} from "../views/Homepage.jsx";
 import {useSearchParams} from "react-router-dom";
 
-// let toggleTimer = null;
-
-export default function FiltersContainer() {
+function FiltersContainer() {
     const [, setSearchParams] = useSearchParams();
     const regionFilter = useContext(HomepageContext);
     const [toggled, setToggled] = useState(null);
@@ -51,3 +49,5 @@ export default function FiltersContainer() {
         </div>
     )
 }
+
+export default memo(FiltersContainer);

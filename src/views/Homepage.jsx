@@ -1,10 +1,9 @@
 import {getCountries} from "../api";
 import {useLoaderData, useSearchParams} from "react-router-dom";
-import SearchForm from "../components/SearchForm.jsx";
-import FiltersContainer from "../components/FiltersContainer.jsx";
 import {createContext, useEffect} from "react";
 import {HiMiniArrowUpCircle} from "react-icons/hi2";
-import {CountryCards} from "../components/CountryCards.jsx";
+import CountryCards from "../components/CountryCards.jsx";
+import MainNav from "../components/MainNav.jsx";
 
 export const HomepageContext = createContext('');
 
@@ -47,10 +46,7 @@ export default function Homepage() {
     }
 
     return (<>
-        <div className='main-nav'>
-            <div className={'search-container'}>{<SearchForm/>}</div>
-            {<HomepageContext.Provider value={regionFilter}> <FiltersContainer/> </HomepageContext.Provider>}
-        </div>
+        <MainNav regionFilter={regionFilter}/>
         <CountryCards data={data} filter={regionFilter}/>
         <button type={'button'} id={'back-to-top'} className={'btn-top'} style={{display: 'none'}}
                 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>

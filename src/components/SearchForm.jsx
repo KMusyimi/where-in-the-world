@@ -2,12 +2,12 @@ import {Form, Link} from "react-router-dom";
 import {IoIosCloseCircleOutline} from "react-icons/io";
 
 import {IoSearch} from "react-icons/io5";
-import {useState} from "react";
+import {memo, useState} from "react";
 import {searchDataJSON} from "../api.js";
 import {prioritizeResults} from "../utils.js";
 
 
-export default function SearchForm() {
+function SearchForm() {
     const [results, setResults] = useState([]);
 
     function handleFilterCountries(e) {
@@ -81,3 +81,5 @@ export default function SearchForm() {
         </div>}
     </>)
 }
+
+export default memo(SearchForm)

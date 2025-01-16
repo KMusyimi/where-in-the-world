@@ -1,10 +1,10 @@
 import {Link} from "react-router-dom";
 import "@theme-toggles/react/css/Around.css"
 import {Around} from "@theme-toggles/react"
-import {useEffect, useState} from "react";
+import {memo, useEffect, useState} from "react";
 import {defaultTheme, updateHtmlTheme} from "../theme.js";
 
-export default function Header() {
+function Header() {
     const [theme, setTheme] = useState(defaultTheme);
 
     useEffect(() => {
@@ -23,3 +23,5 @@ export default function Header() {
                     onClick={handleClick}>{theme === 'dark' ? 'light mode' : 'dark mode'}</Around>
         </header>)
 }
+
+export default memo(Header);

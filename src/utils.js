@@ -9,5 +9,6 @@ export function prioritizeResults(template, value) {
             return item;
         }
     });
+
     return Array.from(new Set([...filteredArr, ...template]));
 }

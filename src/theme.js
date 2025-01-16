@@ -13,5 +13,3 @@ export const defaultTheme = currentThemeStr({localStorageTheme, systemTheme});
 export function updateTheme(theme) {
     document.querySelector("html").setAttribute("data-theme", theme);
 }
-
-updateTheme(defaultTheme);

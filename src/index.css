@@ -23,6 +23,11 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+[data-theme="light"],
+[data-theme="dark"] {
+    transition: color ease-in-out 200ms;
+;
+}
 [data-theme="dark"] {
     color: var(--light-gray);
     background-color: var(--secondary-blue);
@@ -30,8 +35,6 @@
     --elements-box-shadow: transparent;
     --input-color: var(--light-gray);
     --input-border-color: transparent;
-    --spinner-color: rgb(37, 113, 128);
-
 }
 
 [data-theme="light"] {

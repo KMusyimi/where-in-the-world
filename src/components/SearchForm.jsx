@@ -24,7 +24,7 @@ function SearchForm() {
         // .*$ everything after the pattern, including the end of the line
         const pattern = value.length === 1 ? `^${value.trim()}` : `^.*${value.trim()}.*$`;
 
-        const countryRegx = new RegExp( pattern, 'i');
+        const countryRegx = new RegExp(pattern, 'i');
         const filteredResults = searchData.filter(data => {
             if (countryRegx.test(data.name)) return data;
         });
@@ -33,8 +33,8 @@ function SearchForm() {
     }
 
     const displayResults = results.length > 0 && results.map((result, id) => (
-        <Link className={'result-links'} key={`results-${id}`}
-              to={`page/?country=${result.name.replace(/\s+/g, '+').toLowerCase()}`}>
+        <li key={`results-${id}`}><Link className={'result-links'}
+                                        to={`page/?country=${result.name.replace(/\s+/g, '+').toLowerCase()}`}>
             <figure className={'d-flex'}>
                 <img className={'flag-results'}
                      src={result.flags}
@@ -44,7 +44,7 @@ function SearchForm() {
                     <p>{result.capital}</p>
                 </figcaption>
             </figure>
-        </Link>)
+        </Link></li>)
     );
 
     return (<>
@@ -75,9 +75,12 @@ function SearchForm() {
                     <IoIosCloseCircleOutline/>
                 </button>
             </div>
-            <ul className={'results-list'}
-                id={'list'}>{results.length > 0 ? displayResults : 'No countries found'}
-            </ul>
+            <div className={'results-wrapper'}>
+                {results.length > 0 ?
+                    <ul className={'results-list'}
+                        id={'list'}>{displayResults}
+                    </ul> : <p>No countries found</p>}
+            </div>
         </div>}
     </>)
 }

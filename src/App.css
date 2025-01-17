@@ -208,22 +208,23 @@
     align-items: center;
     font-size: 2rem;
 }
-
-.results-container > ul {
+.results-container > .results-wrapper {
     background-color: var(--elements-color);
     padding: 1.5em;
-    border-radius: inherit;
     max-height: 330px;
+    border-radius: inherit;
     overflow-y: auto;
+
+}
+.results-container > ul {
     scroll-behavior: smooth;
 }
-
-.result-links {
+.results-container ul li {
     display: block;
     margin-bottom: 1.25em;
-}
 
-.result-links:last-child {
+}
+.results-container ul > li:last-child {
     margin-bottom: 0;
 }
 

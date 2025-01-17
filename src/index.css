@@ -70,7 +70,9 @@ a {
 a:hover {
     color: #0D9276;
 }
-
+li{
+    list-style: none;
+}
 
 body {
     margin: 0;

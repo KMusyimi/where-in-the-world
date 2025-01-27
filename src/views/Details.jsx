@@ -1,5 +1,5 @@
 import {getPageData} from "../api.js";
-import {Await, Link, useLoaderData} from "react-router-dom";
+import {Await, Link, useLoaderData, useSearchParams} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import BackButton from "../components/BackButton.jsx";
 import {Spinner} from "../components/Spinner.jsx";
@@ -13,6 +13,7 @@ export async function detailsLoader({request}) {
 
 export default function Details() {
     window.scrollTo({top: 0, behavior: "auto"});
+    const [countryParam,] = useSearchParams();
     const countryData = useLoaderData();
     const isEmpty = (obj) => Object.keys(obj).length === 0;
 
@@ -32,6 +33,7 @@ export default function Details() {
                                                                                 to={`/page/?country=${country
                                                                                     .replace(/\s+/g, '+')
                                                                                     .toLowerCase()}`}>{country}</Link>);
+
         return (<section className='page'>
                 <section>
                     <h1 className={'fw-800'}>{name.common}</h1>

@@ -1,17 +1,16 @@
 import {IoIosArrowDropdown, IoIosCloseCircleOutline} from "react-icons/io";
-import {memo, useContext, useState} from "react";
-import {HomepageContext} from "../views/Homepage.jsx";
+import {memo, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 
 function FiltersContainer() {
-    const [, setSearchParams] = useSearchParams();
-    const regionFilter = useContext(HomepageContext);
+    const [filterParams, setFilterParams] = useSearchParams();
     const [toggled, setToggled] = useState(null);
+    const regionParam = filterParams.get("region");
 
     const toggle = () => setToggled(!toggled);
 
     function handleFilterChange(key, value) {
-        setSearchParams(prevParams => {
+        setFilterParams(prevParams => {
             if (value === null) {
                 prevParams.delete(key);
             } else {
@@ -27,22 +26,22 @@ function FiltersContainer() {
                     type={'button'} onClick={toggle}>Filter by
                 Region {toggled ? <IoIosCloseCircleOutline/> : <IoIosArrowDropdown/>}</button>
             <div className={'tags-container'}>
-                <button className={`filter-tag txt-caps ${!regionFilter ? 'checked' : ''}`}
+                <button className={`filter-tag txt-caps ${!regionParam ? 'checked' : ''}`}
                         onClick={() => handleFilterChange('region', null)}> all
                 < /button>
-                <button className={`filter-tag txt-caps ${regionFilter === 'africa' ? 'checked' : ''}`}
+                <button className={`filter-tag txt-caps ${regionParam === 'africa' ? 'checked' : ''}`}
                         onClick={() => handleFilterChange('region', 'africa')}> africa
                 < /button>
-                <button className={`filter-tag txt-caps ${regionFilter === 'americas' ? 'checked' : ''}`}
+                <button className={`filter-tag txt-caps ${regionParam === 'americas' ? 'checked' : ''}`}
                         onClick={() => handleFilterChange('region', 'americas')}> america
                 < /button>
-                <button className={`filter-tag txt-caps ${regionFilter === 'asia' ? 'checked' : ''}`}
+                <button className={`filter-tag txt-caps ${regionParam === 'asia' ? 'checked' : ''}`}
                         onClick={() => handleFilterChange('region', 'asia')}> asia
                 < /button>
-                <button className={`filter-tag txt-caps ${regionFilter === 'europe' ? 'checked' : ''}`}
+                <button className={`filter-tag txt-caps ${regionParam === 'europe' ? 'checked' : ''}`}
                         onClick={() => handleFilterChange('region', 'europe')}> europe
                 < /button>
-                <button className={`filter-tag txt-caps ${regionFilter === 'oceania' ? 'checked' : ''}`}
+                <button className={`filter-tag txt-caps ${regionParam === 'oceania' ? 'checked' : ''}`}
                         onClick={() => handleFilterChange('region', 'oceania')}> oceania
                 < /button>
             </div>

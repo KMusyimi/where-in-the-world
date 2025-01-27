@@ -10,8 +10,8 @@ import NotFound from "./views/404.jsx";
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path='/' element={<Layout/>}>
-        <Route index element={<Homepage/>} loader={homepageLoader}/>
-        <Route path={'page'} element={<Details/>} loader={detailsLoader}/>
+        <Route index element={<Homepage/>} loader={homepageLoader} errorElement={<Error/>}/>
+        <Route path={'page'} element={<Details/>} loader={detailsLoader} errorElement={<Error/>}/>
         <Route path={'results'} element={<Results/>} loader={resultsLoader} errorElement={<Error/>}/>
         <Route path={'*'} element={<NotFound/>}/>
     </Route>), {

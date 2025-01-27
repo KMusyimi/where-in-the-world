@@ -1,10 +1,13 @@
-import {Await, Link} from "react-router-dom";
+import {Await, Link, useSearchParams} from "react-router-dom";
 import {formatPopulation} from "../utils.js";
 import {memo, Suspense} from "react";
 import {Spinner} from "./Spinner.jsx";
 
 // eslint-disable-next-line react/prop-types
-function CountryCards({data, filter}) {
+function CountryCards({data}) {
+    const [searchParams] = useSearchParams();
+    const filter = searchParams.get("region");
+
     const handleClick = (e) => {
         const yPos = Math.floor(window.scrollY) - 100;
         sessionStorage.setItem('scrollPosition', yPos)

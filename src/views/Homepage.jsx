@@ -1,11 +1,10 @@
 import {getCountries} from "../api";
 import {useLoaderData, useSearchParams} from "react-router-dom";
-import {createContext, useEffect} from "react";
+import {useEffect} from "react";
 import {HiMiniArrowUpCircle} from "react-icons/hi2";
 import CountryCards from "../components/CountryCards.jsx";
 import MainNav from "../components/MainNav.jsx";
 
-export const HomepageContext = createContext('');
 
 export async function homepageLoader() {
     const countries = getCountries();
@@ -14,10 +13,6 @@ export async function homepageLoader() {
 
 export default function Homepage() {
     const data = useLoaderData();
-
-    const [searchParams] = useSearchParams();
-    const regionFilter = searchParams.get("region");
-
     useEffect(() => {
         const scrollPosition = sessionStorage.getItem('scrollPosition');
         let scrollTimer = null;
@@ -47,8 +42,8 @@ export default function Homepage() {
     }
 
     return (<>
-        <MainNav regionFilter={regionFilter}/>
-        <CountryCards data={data} filter={regionFilter}/>
+        <MainNav/>
+        <CountryCards data={data}/>
         <button type={'button'} id={'back-to-top'} className={'btn-top'} style={{display: 'none'}}
                 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             <HiMiniArrowUpCircle/></button>

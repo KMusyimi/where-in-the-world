@@ -14,7 +14,10 @@ function CountryCards({data}) {
     }
 
     function renderCountries(arr) {
-        return arr.map((country, idx) => {
+        const arrCopy = [...arr].sort((a, b) => a.name.common.localeCompare(b.name.common));
+        const countriesArr = filter ? arrCopy.filter(country => filter === country.region.toLowerCase()) : arrCopy;
+
+        return countriesArr.map((country, idx) => {
             const {capital, flags, population, region, name} = country;
             return (<Link key={`c-${idx}`}
                           id={`${name.common.replace(/\s+/g, '+').toLowerCase()}`}
@@ -43,13 +46,10 @@ function CountryCards({data}) {
         {<Suspense fallback={<Spinner/>}>
             {/* eslint-disable-next-line react/prop-types */}
             <Await resolve={data?.countries}>
-                {(loadedCountries) => {
-                    const loadedCopy = [...loadedCountries].sort((a, b) => a.name.common.localeCompare(b.name.common));
-                    const countriesArr = filter ? loadedCopy.filter(country => filter === country.region.toLowerCase()) : loadedCopy;
-                    return renderCountries(countriesArr);
-                }}
+                {renderCountries}
             </Await>
-        </Suspense>}</div>)
+        </Suspense>}
+    </div>)
 }
 
 export default memo(CountryCards);

@@ -11,7 +11,7 @@ export async function getResults(results) {
             }
         }
         const results = await resp.json();
-        const searchResults = (data)=> (data)
+        const searchResults = (data) => (data)
         return searchResults(...results);
     }));
 
@@ -62,19 +62,21 @@ export async function getPageData(param) {
     }
     const countryData = await resp.json();
     const getBorderCountries = async (country) => {
-        if (country.borders.length > 0) {
-            const url = `https://restcountries.com/v3.1/alpha?codes=${country.borders.join(',').toLowerCase()}&&fields=name`;
-            const resp = await fetch(url);
-            if (!resp.ok) {
-                throw {
-                    status: resp.status, statusText: resp.statusText, message: 'Could not get border countries'
-                }
+        const countryCopy = country;
+        const url = `https://restcountries.com/v3.1/alpha?codes=${countryCopy.borders.join(',').toLowerCase()}&&fields=name`;
+        const resp = await fetch(url);
+        if (!resp.ok) {
+            throw {
+                status: resp.status, statusText: resp.statusText, message: 'Could not get border countries'
             }
-            const data = await resp.json();
-            country.borders = getCountryName(data);
         }
+        const data = await resp.json();
+        countryCopy.borders = getCountryName(data);
+        return {...countryCopy}
     }
-    await getBorderCountries(...countryData);
+    if (countryData[0].borders.length > 0) {
+        return await getBorderCountries(...countryData);
+    }
     return countryData[0];
 }
 

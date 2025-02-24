@@ -402,6 +402,7 @@
     display: grid;
     gap: 2.5em;
     align-items: center;
+    padding-block: 3.25em;
 }
 
 .details-container .page section > h1 {
@@ -469,8 +470,8 @@
 }
 
 .details-container .page > figure {
-    height: fit-content;
-    width: fit-content;
+    height: 300px;
+    width: 100%;
     align-self: start;
 }
 

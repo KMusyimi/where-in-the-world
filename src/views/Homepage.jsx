@@ -1,5 +1,5 @@
 import {getCountries} from "../api";
-import {useLoaderData, useSearchParams} from "react-router-dom";
+import {useLoaderData} from "react-router-dom";
 import {useEffect} from "react";
 import {HiMiniArrowUpCircle} from "react-icons/hi2";
 import CountryCards from "../components/CountryCards.jsx";

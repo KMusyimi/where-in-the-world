@@ -4,14 +4,13 @@ import {IoIosCloseCircleOutline} from "react-icons/io";
 import {IoSearch} from "react-icons/io5";
 import {memo, useState} from "react";
 import {searchDataJSON} from "../api.js";
-import {prioritizeResults} from "../utils.js";
+import {debounce, prioritizeResults} from "../utils.js";
 
 
 function SearchForm() {
     const [results, setResults] = useState([]);
 
     function handleFilterCountries(e) {
-        e.preventDefault();
         e.target.focus();
         const {value} = e.target;
         const searchData = JSON.parse(searchDataJSON)
@@ -59,7 +58,7 @@ function SearchForm() {
                         className='search-input'
                         autoComplete={'on'}
                         placeholder='Search for a country...'
-                        onInput={handleFilterCountries}
+                        onInput={debounce(handleFilterCountries, 300)}
                         required={true}
                     />
                 </div>
@@ -79,7 +78,7 @@ function SearchForm() {
                 {results.length > 0 ?
                     <ul className={'results-list'}
                         id={'list'}>{displayResults}
-                    </ul> : <p>No countries found</p>}
+                    </ul> : <span>No countries found</span>}
             </div>
         </div>}
     </>)

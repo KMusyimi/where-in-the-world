@@ -1,6 +1,6 @@
 import {getCountries} from "../api";
 import {useLoaderData} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {HiMiniArrowUpCircle} from "react-icons/hi2";
 import CountryCards from "../components/CountryCards.jsx";
 import MainNav from "../components/MainNav.jsx";
@@ -43,7 +43,7 @@ export default function Homepage() {
 
     return (<>
         <MainNav/>
-        <CountryCards data={data}/>
+        <CountryCards data={data} />
         <button type={'button'} id={'back-to-top'} className={'btn-top'} style={{display: 'none'}}
                 onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
             <HiMiniArrowUpCircle/></button>

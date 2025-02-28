@@ -12,3 +12,13 @@ export function prioritizeResults(template, value) {
 
     return Array.from(new Set([...filteredArr, ...template]));
 }
+
+export function debounce(func, delay) {
+    let debounceTimer;
+    return (...args) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(()=> {
+            func(...args)
+        }, delay);
+    }
+}
